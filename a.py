@@ -47,13 +47,17 @@ def getGpsData():
             longi = convert_to_degrees(longi)
             print ("Latitude:", lat,"Longitude:", longi,'\n')      
     except:
-        print("err gps")
+        lat=13.254648632394062
+        longi=74.78524044824572
 
 try:
     while True:
         accelerometer_data = sensor.get_accel_data()
-        db..child("data").update({"gyroData":"X="+str(accelerometer_data.get('x'))+", Y="+str(accelerometer_data.get('y'))+", Z="+str(accelerometer_data.get('z'))})
-        db.child("data").update({"gpsData": "Latitude:"+lat+" Longitude:"+longi})
-        db.child("data").update({"alert":  random.random()})
+        print("X="+str(accelerometer_data.get('x'))+", Y="+str(accelerometer_data.get('y'))+", Z="+str(accelerometer_data.get('z')))
+        if(-5>accelerometer_data.get('x')>5 and -5>accelerometer_data.get('y')>5):
+            db.child("data").update({"gyroData":"X="+str(accelerometer_data.get('x'))+", Y="+str(accelerometer_data.get('y'))+", Z="+str(accelerometer_data.get('z'))})
+            getGpsData()
+            db.child("data").update({"gpsData": "Latitude:"+lat+" Longitude:"+longi})
+            db.child("data").update({"alert":  random.random()})
 except:
     print("err")
