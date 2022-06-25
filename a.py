@@ -49,6 +49,7 @@ def getGpsData():
     except:
         lat=13.254648632394062
         longi=74.78524044824572
+        print ("Latitude:", lat,"Longitude:", longi,'\n')
 
 try:
     while True:
